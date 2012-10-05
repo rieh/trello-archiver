@@ -1,6 +1,7 @@
 def createspreadsheet(board, filenamestub="productbacklogbackup", includecomments=true)
   lists = board.lists
-  filename = "archive/#{DateTime.now.strftime "%Y%m%dT%H%M"}_#{filenamestub}.xslx"
+  FileUtils.mkdir("archive") unless Dir.exists?("archive")
+  filename = "archive/#{DateTime.now.strftime "%Y%m%dT%H%M"}_#{filenamestub}.xlsx"
   SimpleXlsx::Serializer.new(filename) do |doc|
     lists.each do |list|
       puts list.name
