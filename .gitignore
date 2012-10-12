@@ -18,4 +18,6 @@ _yardoc
 doc/
 archive/
 .DS_Store
+
+# Protect private config.yml
 config.yml
