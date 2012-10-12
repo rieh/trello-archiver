@@ -5,7 +5,8 @@ require 'trello'
 require 'rubygems'
 require 'simple_xlsx'
 require 'yaml'
-require_relative 'filewriter'
+# require_relative '../lib/trello-archiver.rb'
+require_relative '../lib/trello-archiver/filewriter.rb'
 
 include Trello
 include Trello::Authorization
