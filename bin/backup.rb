@@ -1,12 +1,10 @@
 # encoding: utf-8
 
-$LOAD_PATH.unshift 'lib'
+# $LOAD_PATH.unshift 'lib'
 require 'trello'
 require 'rubygems'
-require 'simple_xlsx'
 require 'yaml'
 require_relative '../lib/trello-archiver.rb'
-# filewriter_xlsx_writer'
 
 include Trello
 include Trello::Authorization
