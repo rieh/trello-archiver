@@ -7,14 +7,6 @@ GIT
       fast_xs (>= 0.7.3)
       rubyzip (>= 0.9.4)
 
-PATH
-  remote: ../xlsx_writer
-  specs:
-    xlsx_writer (0.4.0)
-      activesupport
-      fast_xs
-      unix_utils
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -64,6 +56,10 @@ GEM
     unix_utils (0.0.14)
       posix-spawn
     vcr (2.2.5)
+    xlsx_writer (0.4.0)
+      activesupport
+      fast_xs
+      unix_utils
 
 PLATFORMS
   ruby
@@ -80,4 +76,4 @@ DEPENDENCIES
   ruby-trello
   simple_xlsx_writer!
   vcr
-  xlsx_writer!
+  xlsx_writer

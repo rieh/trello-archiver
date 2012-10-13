@@ -40,26 +40,30 @@ end
 board = Board.find(boardarray[board_to_archive].id)
 
 
-  # if board_to_archive != -1
-  #   puts "Would you like to provide a filename? (y/n)"
-  #   response = gets.downcase.chomp
-    
-  #   if response.to_s =="y"
-  #     puts "Enter filename:"
-  #     filename = gets
-  #   else
-  #     filename = board.name.parameterize
-  #   end
-  # else
-    filename = board.name.parameterize
-  # end
+if board_to_archive == -1
+   puts "Cancelling"
+   exit 1 
+end
+
+puts "Would you like to provide a filename? (y/n)"
+
+if CONFIG['filename'] == 'default'
+  filename = board.name.parameterize
+else
+  response = gets.downcase.chomp
+   if response.to_s =="y"
+     puts "Enter filename:"
+     filename = gets
+   else
+     filename = board.name.parameterize
+   end
+end
 
 
 	puts "Preparing to backup #{board.name}"
 	lists = board.lists
 
-  createspreadsheet(board, filename)
-  #
-# else
-# 	puts "Cancelling"
-# end
+  TrelloArchiver.new(:board => board, :filename => filename, :format => 'csv').createspreadsheet
+
+  # createspreadsheet(:board => board, :filename => filename)
+

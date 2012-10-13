@@ -21,3 +21,6 @@ archive/
 
 # Protect private config.yml
 config.yml
+
+# working notes
+notes.txt
