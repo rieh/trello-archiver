@@ -1,10 +1,8 @@
 # encoding: utf-8
 
-$LOAD_PATH.unshift 'lib'
 require 'trello'
 require 'rubygems'
-require 'simple_xlsx'
-require_relative 'filewriter'
+require_relative '../lib/trello-archiver'
 require 'yaml'
 
 include Trello
@@ -29,6 +27,6 @@ me.boards.each do |board|
   else
     filename = board.name.parameterize
     puts "Preparing to backup #{board.name}"
-    createspreadsheet(board, filename)
+    TrelloArchiver.new(:board => board, :filename => filename, :format => 'csv').createspreadsheet
 	end
 end
