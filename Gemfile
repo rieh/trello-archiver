@@ -1,7 +1,6 @@
 source :rubygems
 
 gem 'ruby-trello'
-gem 'simple_xlsx_writer', :git => "git://github.com/zph/simple_xlsx_writer.git", :branch => 'zip_corruption'
 gem 'xlsx_writer'
 gem 'pry'
 
