@@ -102,6 +102,7 @@ module TrelloArchiver
       @filename = "#{Dir.pwd}/#{date}_#{@options[:filename].upcase}.#{@options[:format]}"
 
       @lists = @options[:board].lists
+      @row_create = ->(sheet, content){ sheet.add_row(content) }
     end
 
     def create_backup
@@ -118,7 +119,7 @@ module TrelloArchiver
         create_xlsx
       else
         #
-        message = "Trello-archiver can create csv and xlsx backups."
+        message = "Trello-archiver can create csv, tsv, and xlsx backups."
         message += " Please choose one of these options and try again."
         puts message
       end
@@ -139,10 +140,10 @@ module TrelloArchiver
           output = "#{Member.find(action.member_creator_id).full_name}"
           output += " [#{ action.date.strftime('%m/%d/%Y') }]"
           output += " : #{action.data['text']} \n\n"
-
         end
       end
     end
+
     def gather_labels_and_comments(card)
       output = {}
       puts "\t#{card.name}"
@@ -158,31 +159,28 @@ module TrelloArchiver
 
     def create_csv
       require 'CSV'
+      header = %w[Name Description Labels Progress Comments]
 
       CSV.open(@filename, "w", :col_sep => @options[:col_sep]) do |sheet|
-        sheet << %w[Name Description Labels Progress Comments]
-
+        sheet.add_row(header)
         @lists.each do |list|
-        puts_list_and_output_cards(list).each do |card|
-            result = gather_labels_and_comments(card)
-            sheet << [card.name, card.description, result[:labels], list.name, result[:comments].join('')]
-          end
+            content = "[card.name, card.description, result[:labels], list.name, result[:comments].join('')]"
+            main_process(list, sheet, content)
         end
       end
     end
 
-    def create_xlsx()
+    def create_xlsx
       require 'xlsx_writer'
+      header = %w[Name Description Labels Comments]
 
       @doc = XlsxWriter.new
 
       @lists.each do |list|
         sheet = @doc.add_sheet(list.name.gsub(/\W+/, '_'))
-        sheet.add_row( %w[Name Description Labels Comments])
-        puts_list_and_output_cards(list).each do |card|
-          result = gather_labels_and_comments(card)
-          sheet.add_row([card.name, card.description, result[:labels], result[:comments].join('')])
-        end
+        sheet.add_row( header )
+        content = "[card.name, card.description, result[:labels], result[:comments].join('')]"
+        main_process(list, sheet, content)
       end
 
       # Moving file to where I want it
@@ -191,6 +189,14 @@ module TrelloArchiver
 
       # Cleanup of temp dir
       @doc.cleanup
+    end
+
+    def main_process(list, sheet, content_string)
+        puts_list_and_output_cards(list).each do |card|
+          result = gather_labels_and_comments(card)
+          content = eval(content_string)
+          @row_create.call(sheet, content)
+        end
     end
 
   end
