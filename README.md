@@ -2,6 +2,8 @@
 
 Simple ruby scripts that you can run to manually or automatically create Excel backups of your [Trello](https://trello.com/) boards. 
 
+[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/zph/trello-archiver)
+
 ##Install
 - Download project
 - run
