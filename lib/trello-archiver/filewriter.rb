@@ -167,7 +167,6 @@ module TrelloArchiver
       CSV.open(@filename, "w", :col_sep => @options[:col_sep]) do |sheet|
         sheet.add_row(header)
         @lists.each do |list|
-            content = "[card.name, card.description, result[:labels], list.name, result[:comments].join('')]"
             main_process(list, sheet, content)
         end
       end
@@ -183,7 +182,6 @@ module TrelloArchiver
       @lists.each do |list|
         sheet = @doc.add_sheet(list.name.gsub(/\W+/, '_'))
         sheet.add_row( header )
-        content = "[card.name, card.description, result[:labels], result[:comments].join('')]"
         main_process(list, sheet, content)
       end
 
