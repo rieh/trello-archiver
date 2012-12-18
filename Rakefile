@@ -14,3 +14,10 @@ begin
 rescue LoadError
   warn "cane not available, quality task not provided."
 end
+
+desc "Run both bins for backup"
+task :backup do
+  sh "rm -f *.xlsx *.tsv"
+  sh "ruby bin/trello_backup.rb"
+  sh "TRELLO_FORMAT='tsv' ruby bin/trello_backup_tsv.rb"
+end

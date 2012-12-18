@@ -99,7 +99,8 @@ module TrelloArchiver
       @options = options
       FileUtils.mkdir("archive") unless Dir.exists?("archive")
       date = DateTime.now.strftime "%Y%m%dT%H%M"
-      @filename = "#{Dir.pwd}/#{date}_#{@options[:filename].upcase}.#{@options[:format]}"
+      @filename = "#{Dir.pwd}/#{date}_"
+      @filename += "#{@options[:filename].upcase}.#{@options[:format]}"
 
       @lists = @options[:board].lists
       @row_create = ->(sheet, content){ sheet.add_row(content) }
@@ -160,6 +161,8 @@ module TrelloArchiver
     def create_csv
       require 'CSV'
       header = %w[Name Description Labels Progress Comments]
+      content = "[card.name, card.description, result[:labels],"
+      content += " list.name, result[:comments].join('')]"
 
       CSV.open(@filename, "w", :col_sep => @options[:col_sep]) do |sheet|
         sheet.add_row(header)
@@ -173,6 +176,7 @@ module TrelloArchiver
     def create_xlsx
       require 'xlsx_writer'
       header = %w[Name Description Labels Comments]
+      content = "[card.name, card.description, result[:labels], result[:comments].join('')]"
 
       @doc = XlsxWriter.new
 
