@@ -19,5 +19,5 @@ desc "Run both bins for backup"
 task :backup do
   sh "rm -f *.xlsx *.tsv"
   sh "ruby bin/trello_backup.rb"
-  sh "TRELLO_FORMAT='tsv' ruby bin/trello_backup_tsv.rb"
+  sh "TRELLO_FORMAT='tsv' ruby bin/trello_backup.rb"
 end
