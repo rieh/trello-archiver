@@ -45,7 +45,7 @@ module TrelloArchiver
         response = gets.downcase.chomp
          if response.to_s =~ /^y/i
            puts "Enter filename:"
-           filename = gets
+           filename = gets.chomp
          else
            filename = @board.name.parameterize
          end
