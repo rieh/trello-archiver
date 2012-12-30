@@ -5,6 +5,8 @@ require 'trello'
 require 'rubygems'
 require 'yaml'
 require_relative '../lib/trello-archiver'
+include Trello
+include Trello::Authorization
 
 CONFIG = YAML::load(File.open("config.yml")) unless defined? CONFIG
 
@@ -20,6 +22,6 @@ me.boards.each do |board|
   else
     filename = board.name.parameterize
     puts "Preparing to backup #{board.name}"
-    TrelloArchiver::Archiver.new(:board => board, :filename => filename, :format => 'csv').create_backup
+    TrelloArchiver::Archiver.new(:board => board, :filename => filename, :format => 'xlsx').create_backup
 	end
 end
