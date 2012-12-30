@@ -15,3 +15,14 @@ access_token_key: yourtokenhere
 
 #Set a collection of any board IDs you want to ignore
 ignore: [boardid1, boardid2]
+
+# OPTIONAL
+# Parameters to set if you repeatedly backup the same board
+# These two setting short circuit the prompt questions
+# So that bin/trello_backup.rb can run automatically
+# 
+## board ##
+# board: 2
+
+## filename ## if default it uses datestamp and board name
+# filename: default
