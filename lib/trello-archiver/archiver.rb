@@ -33,6 +33,7 @@ module TrelloArchiver
         @options[:col_sep] = "\t"
         create_csv
       when 'csv'
+        @options[:col_sep] = ","
         create_csv
       when 'xlsx'
         create_xlsx
@@ -51,6 +52,7 @@ module TrelloArchiver
       content += " list.name, result[:comments].join('')]"
 
       CSV.open(@filename, "w", :col_sep => @options[:col_sep]) do |sheet|
+        require 'pry'; binding.pry
         sheet.add_row(header)
         @lists.each do |list|
             process_cards_and_append_to_sheet(list, sheet, content)
