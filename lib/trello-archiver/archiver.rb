@@ -7,8 +7,12 @@ module TrelloArchiver
             {:board => "",
              :filename => "trello_backup",
              :format => 'xlsx',
-             :col_sep => ","})
+             :col_sep => ",",
+             :output => STDOUT,
+            }
+                  )
       @options = options
+      @output = options[:output]
 
       make_archive_folder
       @filename = set_filename
@@ -44,8 +48,8 @@ module TrelloArchiver
       else
         #
         message = "Trello-archiver can create csv, tsv, and xlsx backups."
-        message += " Please choose one of these options and try again."
-        puts message
+        message += " Please choose one of these options and try again.\n"
+        @output << message
       end
     end
 
@@ -106,14 +110,14 @@ module TrelloArchiver
 
     def gather_labels_and_comments(card)
       output = {}
-      puts "\t#{card.name}"
+      @output << "\t#{card.name}\n"
       output[:labels] = card_labels_if_existing(card)
       output[:comments] = gather_comments(card)
       output
     end
 
     def puts_list_and_output_cards(list)
-      puts list.name
+      @output << "#{list.name}\n"
       cards = list.cards
     end
 
