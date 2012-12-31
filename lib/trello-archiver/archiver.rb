@@ -9,11 +9,9 @@ module TrelloArchiver
              :format => 'xlsx',
              :col_sep => ","})
       @options = options
-      FileUtils.mkdir("archive") unless Dir.exists?("archive")
-      date = DateTime.now.strftime "%Y%m%dT%H%M"
-      @filename = "#{Dir.pwd}/#{date}_"
-      @filename += "#{@options[:filename].upcase}.#{@options[:format]}"
 
+      make_archive_folder
+      @filename = set_filename
       @lists = @options[:board].lists
       @row_create = ->(sheet, content){ sheet.add_row(content) }
     end
@@ -23,20 +21,26 @@ module TrelloArchiver
     end
 
     private
+    def make_archive_folder
+      FileUtils.mkdir("archive") unless Dir.exists?("archive")
+    end
 
+    def set_filename
+      date = DateTime.now.strftime "%Y%m%dT%H%M"
+      filename = "#{Dir.pwd}/#{date}_"
+      filename += "#{@options[:filename].upcase}.#{@options[:format]}"
+      filename
+    end
     def create_format_specific_sheet
       case @options[:format]
-      when 'csv' && ( @options[:col_sep] == "\t" )
-        @options[:format] = 'tsv'
+      when 'xlsx'
+        create_xlsx
+      when 'csv'
+        @options[:col_sep] = ","
         create_csv
       when 'tsv'
         @options[:col_sep] = "\t"
         create_csv
-      when 'csv'
-        @options[:col_sep] = ","
-        create_csv
-      when 'xlsx'
-        create_xlsx
       else
         #
         message = "Trello-archiver can create csv, tsv, and xlsx backups."
@@ -52,7 +56,6 @@ module TrelloArchiver
       content += " list.name, result[:comments].join('')]"
 
       CSV.open(@filename, "w", :col_sep => @options[:col_sep]) do |sheet|
-        require 'pry'; binding.pry
         sheet.add_row(header)
         @lists.each do |list|
             process_cards_and_append_to_sheet(list, sheet, content)

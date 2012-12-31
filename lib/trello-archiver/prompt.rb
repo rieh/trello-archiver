@@ -1,3 +1,4 @@
+require 'trello'
 module TrelloArchiver
 
   class Prompt
@@ -6,6 +7,11 @@ module TrelloArchiver
 
     def initialize(config)
       @config = config
+      @format = set_format
+    end
+
+    def set_format
+      ENV['TRELLO_FORMAT'] || @config['format'] || 'csv'
     end
 
     def get_board
@@ -63,6 +69,7 @@ module TrelloArchiver
       result = {}
       result[:board] = @board
       result[:filename] = @filename
+      result[:format] = @format
       result
     end
 

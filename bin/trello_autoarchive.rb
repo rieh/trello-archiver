@@ -21,7 +21,8 @@ me.boards.each do |board|
 	  puts "Skipping #{board.name}"
   else
     filename = board.name.parameterize
-    puts "Preparing to backup #{board.name}"
-    TrelloArchiver::Archiver.new(:board => board, :filename => filename, :format => 'xlsx').create_backup
+    # puts "Preparing to backup #{board.name}"
+    input = TrelloArchiver::Prompt.new(CONFIG).run
+    TrelloArchiver::Archiver.new(:board => board, :filename => filename, :format => input[:format]).create_backup
 	end
 end

@@ -13,4 +13,4 @@ TrelloArchiver::Authorize.new(CONFIG).authorize
 
 input = TrelloArchiver::Prompt.new(CONFIG).run
 
-TrelloArchiver::Archiver.new(:board => input[:board], :filename => input[:filename], :format => ENV['TRELLO_FORMAT'] || 'xlsx').create_backup
+TrelloArchiver::Archiver.new(:board => input[:board], :filename => input[:filename], :format => input[:format]).create_backup
