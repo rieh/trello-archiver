@@ -8,55 +8,80 @@ PATH
 GEM
   remote: http://rubygems.org/
   specs:
-    activemodel (3.2.8)
-      activesupport (= 3.2.8)
+    activemodel (3.2.9)
+      activesupport (= 3.2.9)
       builder (~> 3.0.0)
-    activesupport (3.2.8)
+    activesupport (3.2.9)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    addressable (2.2.8)
-    builder (3.0.3)
+    addressable (2.3.2)
+    builder (3.0.4)
     cane (2.5.0)
       parallel
     coderay (1.0.8)
+    cucumber (1.2.1)
+      builder (>= 2.1.2)
+      diff-lcs (>= 1.1.3)
+      gherkin (~> 2.11.0)
+      json (>= 1.4.6)
+    diff-lcs (1.1.3)
     fakeweb (1.3.0)
     fast_xs (0.8.0)
+    gherkin (2.11.5)
+      json (>= 1.4.6)
     growl (1.0.3)
-    guard (1.4.0)
-      listen (>= 0.4.2)
+    guard (1.6.1)
+      listen (>= 0.6.0)
+      lumberjack (>= 1.0.2)
+      pry (>= 0.9.10)
       thor (>= 0.14.6)
     guard-bundler (1.0.0)
       bundler (~> 1.0)
       guard (~> 1.1)
+    guard-cucumber (1.2.2)
+      cucumber (>= 1.2.0)
+      guard (>= 1.1.0)
     guard-minitest (0.5.0)
       guard (>= 0.4)
+    guard-rspec (2.3.1)
+      guard (>= 1.1)
+      rspec (~> 2.11)
     i18n (0.6.1)
-    listen (0.5.3)
-    method_source (0.8)
+    json (1.7.5)
+    listen (0.7.0)
+    lumberjack (1.0.2)
+    method_source (0.8.1)
     mime-types (1.19)
-    minitest (4.1.0)
-    multi_json (1.3.6)
+    minitest (4.3.3)
+    multi_json (1.5.0)
     oauth (0.4.7)
     parallel (0.6.1)
-    posix-spawn (0.3.6)
     pry (0.9.10)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.3.1)
-    rake (0.9.2.2)
+    rake (10.0.3)
     rb-fsevent (0.9.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    ruby-trello (0.4.4)
+    rspec (2.12.0)
+      rspec-core (~> 2.12.0)
+      rspec-expectations (~> 2.12.0)
+      rspec-mocks (~> 2.12.0)
+    rspec-core (2.12.0)
+    rspec-expectations (2.12.0)
+      diff-lcs (~> 1.1.3)
+    rspec-mocks (2.12.0)
+    ruby-trello (0.4.4.3)
       activemodel
-      addressable (~> 2.2.6)
+      addressable (~> 2.3)
+      json
       oauth (~> 0.4.5)
       rest-client (~> 1.6.7)
     slop (3.3.3)
     thor (0.16.0)
-    unix_utils (0.0.14)
-      posix-spawn
-    vcr (2.2.5)
+    unix_utils (0.0.15)
+    vcr (2.3.0)
     xlsx_writer (0.4.0)
       activesupport
       fast_xs
@@ -71,10 +96,13 @@ DEPENDENCIES
   growl
   guard
   guard-bundler
+  guard-cucumber
   guard-minitest
+  guard-rspec
   minitest
   pry
   rake
   rb-fsevent
+  rspec
   trello-archiver!
   vcr
