@@ -6,3 +6,5 @@ require_relative 'trello-archiver/prompt'
 require_relative 'trello-archiver/archiver'
 require_relative 'trello-archiver/version'
 
+#HACK
+$VERBOSE = nil
