@@ -30,3 +30,6 @@ notes.txt
 *.tsv
 *.xlsx
 *.xls
+
+vcr_cassettes/
+*.json
