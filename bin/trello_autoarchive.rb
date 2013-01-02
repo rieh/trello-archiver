@@ -2,7 +2,7 @@
 #!/usr/bin/env ruby
 
 require 'trello'
-require 'rubygems'
+# require 'rubygems'
 require 'yaml'
 require_relative '../lib/trello-archiver'
 include Trello

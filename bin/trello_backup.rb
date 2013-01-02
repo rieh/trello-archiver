@@ -3,7 +3,7 @@
 
 # $LOAD_PATH.unshift 'lib'
 require 'trello'
-require 'rubygems'
+# require 'rubygems'
 require 'yaml'
 require_relative '../lib/trello-archiver.rb'
 
