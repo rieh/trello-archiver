@@ -12,7 +12,7 @@ module TrelloArchiver
             }
                   )
       @options = options
-      @output = options[:output]
+      @output = options[:output] || STDOUT
 
       make_archive_folder
       @filename = set_filename
@@ -54,7 +54,7 @@ module TrelloArchiver
     end
 
     def create_csv
-      require 'csv'
+      require 'CSV'
       header = %w[Name Description Labels Progress Comments]
       content = "[card.name, card.description, result[:labels],"
       content += " list.name, result[:comments].join('')]"
@@ -117,7 +117,7 @@ module TrelloArchiver
     end
 
     def puts_list_and_output_cards(list)
-      @output << "#{list.name}\n"
+      @output << "#{list.name}\n" || ""
       cards = list.cards
     end
 
