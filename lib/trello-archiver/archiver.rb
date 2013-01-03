@@ -54,7 +54,7 @@ module TrelloArchiver
     end
 
     def create_csv
-      require 'CSV'
+      require 'csv'
       header = %w[Name Description Labels Progress Comments]
       content = "[card.name, card.description, result[:labels],"
       content += " list.name, result[:comments].join('')]"
