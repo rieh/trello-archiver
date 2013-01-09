@@ -32,10 +32,10 @@ ACCESS_TOKEN_KEY=$(egrep -oi "access_token_key:\W?(\<[[:alnum:]]{64,}\>)$" confi
 # Start loop to act on args until args are all completed
 while [ -n "$1" ]
   do
-    echo $1
     current_hash=$1
+    echo "Board Hash: $current_hash"
     url="https://api.trello.com/1/boards/$(echo $current_hash)?actions=all&actions_limit=1000&cards=all&lists=all&members=all&member_fields=all&checklists=all&fields=all&key=${PUBLIC_KEY}&token=${ACCESS_TOKEN_KEY}"
-    echo $url
+    echo "URL : $url"
     response=$( curl $url )
     # Check response to see if it's valid
     case $response in
