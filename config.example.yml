@@ -26,3 +26,6 @@ ignore: [boardid1, boardid2]
 
 ## filename ## if default it uses datestamp and board name
 # filename: default
+
+# Variable used for json exports to avoid loading all of Ruby-Trello
+username: USER_(ie @name_on_trello)

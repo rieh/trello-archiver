@@ -7,11 +7,11 @@ CONFIG = YAML.load_file('config.yml')
 board_hash = CONFIG['board_hash']
 key = CONFIG['public_key']
 application_token = CONFIG['access_token_key']
-
+username = CONFIG['username']
 url_slug = "https://api.trello.com/1"
 url = "#{url_slug}/boards/#{board_hash}?actions=all&actions_limit=1000&cards=all&lists=all&members=all&member_fields=all&checklists=all&fields=all&key=#{key}&token=#{application_token}"
 
-boards = "#{url_slug}/members/zanderhill/boards?&key=#{key}&token=#{application_token}"
+boards = "#{url_slug}/members/#{username}/boards?&key=#{key}&token=#{application_token}"
 
 a = JSON.parse(open(url).read)
 board_json = JSON.parse(open(boards).read)
